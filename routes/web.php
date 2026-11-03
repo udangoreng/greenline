@@ -8,6 +8,7 @@ Route::get('/keranjang', [S::class, 'cart']);
 Route::post('/keranjang/tambah/{product}', [S::class, 'add']);
 Route::post('/keranjang/ubah', [S::class, 'update']);
 use App\Http\Controllers\AuthController as U;
+use App\Http\Controllers\ProfileController as P;
 Route::get('/masuk', [U::class, 'loginForm'])->name('login');
 Route::post('/masuk', [U::class, 'login']);
 Route::get('/daftar', [U::class, 'registerForm']);
@@ -17,7 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [S::class, 'checkout']);
     Route::post('/checkout', [S::class, 'store']);
     Route::get('/pesanan', [S::class, 'orders']);
+    Route::get('/profil', [P::class, 'show']);
+    Route::post('/profil', [P::class, 'update']);
+    Route::post('/profil/password', [P::class, 'password']);
     Route::get('/pesanan/{order}', [S::class, 'order']);
+    Route::post('/pesanan/{order}/selesai', [S::class, 'confirm']);
 });
 Route::post('/midtrans/notify', [S::class, 'notify']);
 
@@ -34,6 +39,7 @@ Route::middleware(AdminAuth::class)->prefix('admin')->group(function () {
     Route::post('/produk', [A::class, 'save']);
     Route::post('/produk/{product}', [A::class, 'save']);
     Route::delete('/produk/{product}', [A::class, 'destroy']);
+    Route::get('/pesanan', [A::class, 'orders']);
     Route::get('/pesanan/{order}', [A::class, 'order']);
     Route::post('/pesanan/{order}', [A::class, 'updateOrder']);
 });

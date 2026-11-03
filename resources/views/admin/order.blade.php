@@ -24,13 +24,17 @@
     @error('stage')
         <p class="err">{{ $message }}</p>
     @enderror
+    @if ($order->stage === 'done')
+        <p>✅ Selesai: dikonfirmasi pembeli.@if ($order->tracking_no) Resi: <b>{{ $order->tracking_no }}</b>@endif</p>
+    @else
     <form method="post" action="/admin/pesanan/{{ $order->code }}" style="max-width:380px">@csrf
         <select name="stage" style="width:100%;padding:9px;margin-bottom:10px">
             <option value="">Dibayar</option>
-            @foreach (['processing' => 'Diproses', 'shipped' => 'Dikirim', 'done' => 'Selesai'] as $k => $l)
+            @foreach (['processing' => 'Diproses', 'shipped' => 'Dikirim'] as $k => $l)
                 <option value="{{ $k }}" @selected($order->stage == $k)>{{ $l }}</option>
             @endforeach
         </select>
         <input name="tracking_no" placeholder="No. resi (opsional)" value="{{ $order->tracking_no }}"><button>Simpan</button>
     </form>
+    @endif
 @endsection

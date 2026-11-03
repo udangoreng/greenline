@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>HijauBumi – Toko Bibit Pohon</title>
+    <title>Greenline – Toko Bibit Pohon</title>
     <style>
         :root {
             --bg: #f6f8f1;
@@ -258,12 +258,13 @@
             }
         }
     </style>
+    <style>.links form{margin:0}.linkbtn{background:none;color:var(--tx);padding:0;border-radius:0;font-weight:400;font-size:inherit}@media(max-width:768px){.links form{padding:15px 4px;border-bottom:1px solid var(--bd)}}</style>
     @yield('style')
 </head>
 
 <body>
     <nav>
-        <a class="brand" href="/">🌱 HijauBumi</a>
+        <a class="brand" href="/">Greenline</a>
         <button class="burger" id="burger" aria-label="Buka menu" aria-controls="links" aria-expanded="false">☰</button>
         <div class="scrim"></div>
         <div class="links" id="links">
@@ -273,11 +274,17 @@
             <a href="/sdg" class="{{ request()->is('sdg') ? 'on' : '' }}">Dampak &amp; SDGs</a>
             <a href="/keranjang" class="{{ request()->is('keranjang') ? 'on' : '' }}">Keranjang
                 ({{ array_sum(session('cart', [])) }})</a>
-            <a href="/masuk" class="{{ request()->is('masuk') ? 'on' : '' }}">Login</a>
+            @auth
+                <a href="/pesanan" class="{{ request()->is('pesanan*') ? 'on' : '' }}">Riwayat</a>
+                <a href="/profil" class="{{ request()->is('profil*') ? 'on' : '' }}">Profil</a>
+                <form method="post" action="/keluar">@csrf<button class="linkbtn">Keluar</button></form>
+            @else
+                <a href="/masuk" class="{{ request()->is('masuk') ? 'on' : '' }}">Login</a>
+            @endauth
         </div>
     </nav>
     @yield('hero')<main>@yield('c')</main>
-    <footer>© 2026 HijauBumi · Pembayaran via Midtrans · Angka serapan CO₂ adalah estimasi edukatif.</footer>
+    <footer>© 2026 Greenline · Pembayaran via Midtrans · Angka serapan CO₂ adalah estimasi edukatif  · Submisi Tugas Literasi Digital Divananda Ayu Sasikirana</footer>
     <script>
         (() => {
             const b = document.body,

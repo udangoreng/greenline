@@ -24,7 +24,7 @@
             </tr>
         @endforelse
     </table>
-    <h2>Pesanan Terbaru</h2>
+    <h2>Pesanan Terbaru <small><a href="/admin/pesanan">Lihat semua →</a></small></h2>
     <table>
         <tr>
             <th>Kode</th>

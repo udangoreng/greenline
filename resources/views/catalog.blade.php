@@ -1,7 +1,6 @@
 @extends('layout')
 @section('c')
-    <h1>
-        Katalog Bibit</h1>
+    <h1>Katalog Bibit</h1>
     <p><a href="/produk">Semua</a>
         @foreach ($types as $t)
             · <a href="/produk?t={{ $t }}">{{ $t }}</a>
@@ -12,4 +11,5 @@
             @include('_card')
         @endforeach
     </div>
+    {{ $products->links('pagination') }}
 @endsection

@@ -1,6 +1,7 @@
 @extends('layout')
 @section('c')<h1>
         Pesanan {{ $order->code }}</h1>
+    @if (session('ok'))<p style="color:var(--g)"><b>✓ {{ session('ok') }}</b></p>@endif
     <style>
         .tl {
             display: flex;
@@ -64,6 +65,14 @@
         </div>
         @if ($order->tracking_no)
             <p>No. resi: <b>{{ $order->tracking_no }}</b></p>
+        @endif
+        @if ($order->status === 'paid' && $order->stage === 'shipped')
+            <div class="c" style="max-width:460px;margin:14px 0">
+                <p style="margin-top:0">Bibit sudah sampai? Konfirmasi agar pesanan ditandai selesai.</p>
+                <form method="post" action="/pesanan/{{ $order->code }}/selesai" onsubmit="return confirm('Pastikan bibit sudah Anda terima. Lanjutkan?')">@csrf
+                    <button>✅ Pesanan Diterima / Selesai</button>
+                </form>
+            </div>
         @endif
     @endif
     <p>Status:

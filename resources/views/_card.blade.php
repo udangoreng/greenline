@@ -2,6 +2,8 @@
     <div class="e">
         @if ($p->photo)
             <img src="{{ $p->photo }}" alt="{{ $p->name }}" loading="lazy">
+            @else
+            <img src="{{ asset('/img/placeholder.jpg') }}" alt="{{ $p->name }}" loading="lazy">
         @endif
     </div>
     <h3><a href="/produk/{{ $p->id }}">{{ $p->name }}</a></h3><i>{{ $p->latin }}</i><br>

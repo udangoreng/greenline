@@ -8,8 +8,8 @@
         @endif
         <input name="name" placeholder="Nama lengkap" value="{{ old('name', auth()->user()->name) }}"><input name="email"
             type="email" placeholder="Email" value="{{ old('email', auth()->user()->email) }}">
-        <input name="phone" placeholder="No. HP" value="{{ old('phone') }}">
-        <textarea name="address" placeholder="Alamat pengiriman" rows="3">{{ old('address') }}</textarea>
+        <input name="phone" placeholder="No. HP" value="{{ old('phone', auth()->user()->phone) }}">
+        <textarea name="address" placeholder="Alamat pengiriman" rows="3">{{ old('address', auth()->user()->address) }}</textarea>
         <select name="zone" id="z" style="width:100%;padding:9px;margin-bottom:10px">
             <option value="">Pilih wilayah pengiriman</option>
             @foreach (config('shop.zones') as $k => $z)

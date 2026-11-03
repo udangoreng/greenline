@@ -5,6 +5,7 @@
     @error('x')
         <p class="err">{{ $message }}</p>
     @enderror
+    <form method="get" style="margin:12px 0;display:flex;gap:8px"><input name="q" value="{{ request('q') }}" placeholder="Cari produk" style="max-width:260px;margin:0"><button>Cari</button></form>
     <table>
         <tr>
             <th>Nama</th>
@@ -25,4 +26,5 @@
             </tr>
         @endforeach
     </table>
+    {{ $products->links('pagination') }}
 @endsection
